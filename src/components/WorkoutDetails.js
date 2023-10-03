@@ -5,7 +5,7 @@ const WorkoutDetails = ({ workout }) => {
   const { dispatch } = useWorkoutsContext();
 
   const updateWorkoutData = async (updatedData) => {
-    const response = await fetch(`/api/workouts/${workout._id}`, {
+    const response = await fetch(`https://backend-api-duz9.onrender.com/api/workouts/${workout._id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -23,7 +23,7 @@ const WorkoutDetails = ({ workout }) => {
   };
 
   const handleDelete = async () => {
-    const response = await fetch(`/api/workouts/${workout._id}`, {
+    const response = await fetch(`https://backend-api-duz9.onrender.com/api/workouts/${workout._id}`, {
       method: "DELETE",
     });
 
