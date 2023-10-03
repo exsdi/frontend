@@ -18,7 +18,7 @@ useEffect (() => {
         // will fetch the workouts from the backend API and store them in response
         //you don't have to explicitly pass local host 4000 because it is
         // being passed in the package.json file as proxy.
-        const response = await fetch('http://localhost:4000/api/workouts');
+        const response = await fetch('https://backend-api-duz9.onrender.com/api/workouts');
         const json = await response.json();
 
         // the ok property is used to check if the response is ok or not

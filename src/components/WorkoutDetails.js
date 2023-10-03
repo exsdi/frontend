@@ -4,7 +4,7 @@ const WorkoutDetails = ({ workout }) => {
   const { dispatch } = useWorkoutsContext();
 
   const handleDelete = async () => {
-    const response = await fetch(`http://localhost:4000/api/workouts${workout._id}`, {
+    const response = await fetch(`https://backend-api-duz9.onrender.com/${workout._id}`, {
       method: "DELETE",
     });
 
