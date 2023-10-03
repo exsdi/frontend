@@ -1,10 +1,29 @@
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
+import UpdateForm from '../components/UpdateForm';
 
 const WorkoutDetails = ({ workout }) => {
   const { dispatch } = useWorkoutsContext();
 
+  const updateWorkoutData = async (updatedData) => {
+    const response = await fetch(`/api/workouts/${workout._id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedData),
+    });
+    
+    const json = await response.json();
+    
+    if (response.ok) {
+      dispatch({ type: "UPDATE_WORKOUT", payload: json });
+    } else {
+      console.log("Error updating workout: ", json.error);
+    }
+  };
+
   const handleDelete = async () => {
-    const response = await fetch(`https://backend-api-duz9.onrender.com/api/workouts/${workout._id}`, {
+    const response = await fetch(`/api/workouts/${workout._id}`, {
       method: "DELETE",
     });
 
@@ -12,6 +31,8 @@ const WorkoutDetails = ({ workout }) => {
 
     if (response.ok) {
       dispatch({ type: "DELETE_WORKOUT", payload: json });
+    } else {
+      console.log("Error deleting workout: ", json.error);
     }
   };
 
@@ -28,6 +49,7 @@ const WorkoutDetails = ({ workout }) => {
       </p>
       <p>{workout.createdAt}</p>
       <span onClick={handleDelete}>Delete</span>
+      <UpdateForm onUpdate={updateWorkoutData} />
     </div>
   );
 };
